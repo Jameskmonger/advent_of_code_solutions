@@ -1,3 +1,5 @@
+// http://adventofcode.com/day/2
+
 var input = `2x3x4`;
 
 Array.max = function(array) {
