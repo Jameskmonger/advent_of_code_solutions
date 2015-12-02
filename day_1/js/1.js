@@ -1,3 +1,5 @@
+// http://adventofcode.com/day/1
+
 var input = "))(((((";
 
 var characterCount = [];
