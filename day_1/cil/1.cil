@@ -57,15 +57,8 @@
 		// Get the length of the string
 		callvirt instance int32 [mscorlib]System.String::get_Length()
 			
-		// Compare the length of the string (just obtained) with the pointer (returns true if length > ptr)
-		clt
-			
-		// Store it in 2 (boolean)
-		stloc.2
-		ldloc.2
-			
-		// If the loaded boolean is true, go to IL_STARTLOOP
-		brtrue.s IL_STARTLOOP
+		// If the pointer (value 1) is less than the length (value 2), go to IL_STARTLOOP
+		blt.s IL_STARTLOOP
 		
 		// Call ReadLine so the console doesn't close
 		call string [mscorlib]System.Console::ReadLine()
