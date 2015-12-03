@@ -27,17 +27,26 @@ class DeliveryManager {
 		
 		for (var d of this.directions) {
 			if (d === Directions.NORTH) {
-				console.log("up");
+				this.location[1]--;
 			}
 			if (d === Directions.EAST) {
-				console.log("right");
+				this.location[0]++;
 			}
 			if (d === Directions.SOUTH) {
-				console.log("down");
+				this.location[1]++;
 			}
 			if (d === Directions.WEST) {
-				console.log("left");
+				this.location[0]--;
 			}
+			
+			var x = this.location[0];
+			var y = this.location[1];
+			
+			if (this.houses[x] === undefined) {
+				this.houses[x] = [];
+			}
+			
+			console.log(this.houses[x][y]);
 		}
 	}
 	
