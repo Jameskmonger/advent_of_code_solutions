@@ -1,3 +1,5 @@
+// http://adventofcode.com/day/3
+
 "use strict";
 
 var Directions = {
