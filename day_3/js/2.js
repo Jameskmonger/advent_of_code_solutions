@@ -107,10 +107,6 @@ class DeliveryManager {
 		return output;
 	}
 	
-	processDirection(dir) {
-		
-	}
-	
 	deliverToHouse(location) {
 		var x = location.x;
 		var y = location.y;
