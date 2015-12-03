@@ -1,0 +1,32 @@
+.assembly extern mscorlib {}
+
+.assembly day_one_part_one {}
+
+.class Program
+{
+  .method static string LoadInput() cil managed
+  {	
+	// Load the file path and read all the text from that file into a string
+	ldstr ".INPUTDATA"
+	call string [mscorlib]System.IO.File::ReadAllText(string)
+	
+	ret
+  }
+
+  .method static void Main(string[] args) cil managed
+  {
+	// Define the entry point for the program
+    .entrypoint
+	.maxstack 2
+	
+	call string Program::LoadInput()
+
+    call void [mscorlib]System.Console::WriteLine(string)
+
+    call string [mscorlib]System.Console::ReadLine()
+
+    pop
+    ret
+  }
+
+}
