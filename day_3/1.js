@@ -1,10 +1,10 @@
 "use strict";
 
 var Directions = {
-	NORTH: 0,
-	EAST: 1,
-	SOUTH: 2,
-	WEST: 3
+	NORTH: '^',
+	EAST: '>',
+	SOUTH: 'v',
+	WEST: '<'
 }
 
 class House {
@@ -25,7 +25,11 @@ class DeliveryManager {
 	}
 	
 	parseDirections(input) {
+		var output = [];
 		
+		for (var i = 0; i < input.length; i++) {
+			
+		}
 	}
 }
 
