@@ -25,15 +25,23 @@ class House {
 
 class DeliveryManager {
 	constructor(input) {
-		this.houses = [];
+		this.resetState();
 		
 		this.directions = this.parseDirections(input);
+	}
+	
+	resetState() {
+		this.houses = [];
 		
 		this.location = [0, 0];
 		
 		this.deliveredCount = 0;
+	}
+	
+	getHousesDeliveredTo() {
+		this.resetState();
 		
-		this.deliverToHouse(x, y);
+		this.deliverToHouse(0, 0);
 		
 		for (var d of this.directions) {
 			this.processDirection(d);
@@ -44,7 +52,7 @@ class DeliveryManager {
 			this.deliverToHouse(x, y);
 		}
 		
-		console.log(this.deliveredCount);
+		return this.deliveredCount;
 	}
 	
 	parseDirections(input) {
@@ -90,3 +98,5 @@ class DeliveryManager {
 }
 
 var mgr = new DeliveryManager("^>v<");
+
+console.log(mgr.getHousesDeliveredTo());
