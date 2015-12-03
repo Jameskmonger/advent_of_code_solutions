@@ -31,10 +31,7 @@ class DeliveryManager {
 		
 		this.deliveredCount = 0;
 		
-		this.houses[0] = [];
-		this.houses[0][0] = new House();
-		this.houses[0][0].deliver();]
-		this.deliveredCount++;
+		this.deliverToHouse(x, y);
 		
 		for (var d of this.directions) {
 			if (d === Directions.NORTH) {
@@ -53,7 +50,7 @@ class DeliveryManager {
 			var x = this.location[0];
 			var y = this.location[1];
 			
-			
+			this.deliverToHouse(x, y);
 		}
 		
 		console.log(this.deliveredCount);
