@@ -34,18 +34,7 @@ class DeliveryManager {
 		this.deliverToHouse(x, y);
 		
 		for (var d of this.directions) {
-			if (d === Directions.NORTH) {
-				this.location[1]--;
-			}
-			if (d === Directions.EAST) {
-				this.location[0]++;
-			}
-			if (d === Directions.SOUTH) {
-				this.location[1]++;
-			}
-			if (d === Directions.WEST) {
-				this.location[0]--;
-			}
+			processDirection(d);
 			
 			var x = this.location[0];
 			var y = this.location[1];
@@ -64,6 +53,21 @@ class DeliveryManager {
 		}
 		
 		return output;
+	}
+	
+	processDirection(dir) {
+		if (d === Directions.NORTH) {
+			this.location[1]--;
+		}
+		if (d === Directions.EAST) {
+			this.location[0]++;
+		}
+		if (d === Directions.SOUTH) {
+			this.location[1]++;
+		}
+		if (d === Directions.WEST) {
+			this.location[0]--;
+		}
 	}
 	
 	deliverToHouse(x, y) {
