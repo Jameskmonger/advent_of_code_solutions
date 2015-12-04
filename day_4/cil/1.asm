@@ -10,7 +10,7 @@
 	{
 		.maxstack 1
 		
-		ldstr "pqrstuv1048970"
+		ldstr "pqrstuv"
 		stsfld string Program::SECRET_KEY
 
 		ret
@@ -20,12 +20,35 @@
 	{
 		.entrypoint
 		
+		.locals init ([0] int32 i,
+					[1] string h)
+		
 		ldsfld string Program::SECRET_KEY
 		call void [mscorlib]System.Console::WriteLine(string)
 		
-		ldsfld string Program::SECRET_KEY
-		call string Program::Generate(string)
-		call void [mscorlib]System.Console::WriteLine(string)
+		ldc.i4.0
+		stloc.0
+		
+		ldstr "h"
+		stloc.1
+		
+		br.s CHECK_LOOP
+		START_LOOP: nop
+		
+		//ldsfld string Program::SECRET_KEY
+		//call string Program::Generate(string)
+		//call void [mscorlib]System.Console::WriteLine(string)
+		
+		CHECK_LOOP: nop		
+		ldloc.0
+		ldc.i4.1
+		add
+		stloc.0
+		
+		br.s START_LOOP
+		
+		FINISH_LOOP: ldloc.0
+		call void [mscorlib]System.Console::WriteLine(int32)
 		
 		call string [mscorlib]System.Console::ReadLine()
 		pop
