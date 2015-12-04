@@ -1,6 +1,6 @@
 var md5 = require('./md5').md5;
 
-const SECRET_KEY = '';
+const SECRET_KEY = 'yzbqklnj';
 
 for (var i = 0; i < 1000000; i++) {
 	if (md5(SECRET_KEY + i).startsWith('00000')) {
