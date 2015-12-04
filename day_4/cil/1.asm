@@ -35,11 +35,25 @@
 		br.s CHECK_LOOP
 		START_LOOP: nop
 		
-		//ldsfld string Program::SECRET_KEY
-		//call string Program::Generate(string)
-		//call void [mscorlib]System.Console::WriteLine(string)
+		// Load the key and the pointer
+		ldsfld string Program::SECRET_KEY
+		ldloc.0
 		
-		CHECK_LOOP: nop		
+		// Box the pointer
+		box [mscorlib]System.Int32
+		
+		// Concatenate them
+		call string [mscorlib]System.String::Concat(object, object)
+		
+		// Generate the hash and store it in 1
+		call string Program::Generate(string)
+		stloc.1
+		
+		CHECK_LOOP: ldloc.1
+		ldstr "00000"
+		callvirt instance bool [mscorlib]System.String::StartsWith(string)
+		brtrue.s FINISH_LOOP
+		
 		ldloc.0
 		ldc.i4.1
 		add
