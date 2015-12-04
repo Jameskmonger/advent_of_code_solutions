@@ -63,6 +63,10 @@
 		// Store the hash's bytes in 2
 		stloc.2
 		
+		// Instantiate a StringBuilder and store it in 3
+		newobj instance void [mscorlib]System.Text.StringBuilder::.ctor()
+		stloc.3
+		
 		ldstr "we need to implement converting the hash back to a string"
 		
 		ret
