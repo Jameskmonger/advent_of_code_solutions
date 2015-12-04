@@ -21,9 +21,23 @@
 		.entrypoint
 		
 		.locals init ([0] int32 i,
-					[1] string h)
+					[1] string h,
+					[2] string k,
+					[3] string r)
 		
-		ldsfld string Program::SECRET_KEY
+		ldstr "Enter your secret key:"
+		call void [mscorlib]System.Console::WriteLine(string)
+		
+		call string [mscorlib]System.Console::ReadLine()
+		stloc.2
+		
+		ldstr "Enter your required prefix:"
+		call void [mscorlib]System.Console::WriteLine(string)
+		
+		call string [mscorlib]System.Console::ReadLine()
+		stloc.3
+
+		ldstr "Starting..."
 		call void [mscorlib]System.Console::WriteLine(string)
 		
 		ldc.i4.0
@@ -36,7 +50,7 @@
 		START_LOOP: nop
 		
 		// Load the key and the pointer
-		ldsfld string Program::SECRET_KEY
+		ldloc.2
 		ldloc.0
 		
 		// Box the pointer
@@ -50,7 +64,7 @@
 		stloc.1
 		
 		CHECK_LOOP: ldloc.1
-		ldstr "00000"
+		ldloc.3
 		callvirt instance bool [mscorlib]System.String::StartsWith(string)
 		brtrue.s FINISH_LOOP
 		
