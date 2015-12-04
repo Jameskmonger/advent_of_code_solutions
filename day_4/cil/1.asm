@@ -68,6 +68,36 @@
 		newobj instance void [mscorlib]System.Text.StringBuilder::.ctor()
 		stloc.3
 		
+		// Instantiate the pointer as 0, and store in 4
+		ldc.i4.0
+		stloc.4
+		
+		START_LOOP: br.s CONTINUE_LOOP
+		
+		// Get the StringBuilder
+		ldloc.3
+		
+		// Get the byte array
+		ldloc.2
+		
+		// Get the pointer
+		ldloc.4
+		
+		// Load the byte at the given index
+		ldelema [mscorlib]System.Byte
+		
+		// Load the format specifier (X2)
+		ldstr "X2"
+		
+		// Call ToString on the byte (with the format specifier passed in), and append it to the StringBuilder
+		call instance string [mscorlib]System.Byte::ToString(string)
+		callvirt instance class [mscorlib]System.Text.StringBuilder [mscorlib]System.Text.StringBuilder::Append(string)
+		
+		// We need to pop the StringBuilder returned by Append
+		pop
+		
+		CONTINUE_LOOP
+		
 		ldstr "we need to implement converting the hash back to a string"
 		
 		ret
