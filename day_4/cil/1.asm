@@ -36,7 +36,8 @@
 	{
 		.locals init ([0] class [mscorlib]System.Security.Cryptography.MD5 md5,
 					[1] class [mscorlib]System.Text.Encoding enc,
-					[2] uint8[] bytes)
+					[2] uint8[] bytes,
+					[3] class [mscorlib]System.Text.StringBuilder sb)
 	
 		// Call the Create() method on MD5 and store it in 0
 		call class [mscorlib]System.Security.Cryptography.MD5 [mscorlib]System.Security.Cryptography.MD5::Create()
