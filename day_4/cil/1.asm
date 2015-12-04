@@ -96,7 +96,27 @@
 		// We need to pop the StringBuilder returned by Append
 		pop
 		
-		CONTINUE_LOOP
+		// Load the pointer, the number 1, add them, then store them
+		ldloc.4
+		ldc.i4.1
+		add
+		stloc.4
+		
+		CONTINUE_LOOP: nop
+		
+		// Load the pointer
+		ldloc.4
+		
+		// Load the byte array
+		ldloc.2
+		
+		// Get the length of the array
+		ldlen
+		
+		// Compare the pointer and the length
+		clt
+		
+		brtrue.s START_LOOP
 		
 		ldstr "we need to implement converting the hash back to a string"
 		
