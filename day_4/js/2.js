@@ -1,6 +1,6 @@
 var md5 = require('./md5').md5;
 
-const SECRET_KEY = '';
+const SECRET_KEY = 'yzbqklnj';
 
 var i = 0;
 while (true) {

@@ -3,31 +3,17 @@
 .assembly day_one_part_one {}
 
 .class Program
-{
-	.field private static char UP_CHARACTER
-	.field private static char DOWN_CHARACTER
+{	
 
-	// Class constructor
-	.method private hidebysig specialname rtspecialname static void .cctor() cil managed
-	{
-		.maxstack 1
-	
-		// Open bracket
-		ldc.i4.s 40
-		stsfld char Program::UP_CHARACTER
-		
-		// Close bracket
-		ldc.i4.s 41
-		stsfld char Program::DOWN_CHARACTER
-	}
-	
 	.method static bool IsUpCharacter(char c) cil managed
 	{
+		.maxstack 2
+	
 		// Load argument 0 (char c)
 		ldarg.0
 		
-		// Load the field UP_CHARACTER
-		ldsfld char Program::UP_CHARACTER
+		// Load the char 40 (open bracket)
+		ldc.i4.s 40
 		
 		// Push 1 if they're equal
 		ceq
@@ -37,6 +23,8 @@
 	
 	.method static string LoadInput() cil managed
 	{	
+		.maxstack 1
+	
 		// Load the file path and read all the text from that file into a string
 		ldstr ".INPUTDATA"
 		call string [mscorlib]System.IO.File::ReadAllText(string)
@@ -48,7 +36,7 @@
 	{
 		.entrypoint
 		
-		.maxstack 2
+		.maxstack 3
 		
 		.locals init ([0] string input,
 				[1] int32 ptr,
@@ -124,6 +112,8 @@
 		
 		// Call ReadLine so the console doesn't close
 		call string [mscorlib]System.Console::ReadLine()
+		
+		pop
 		
 		ret
 	}
