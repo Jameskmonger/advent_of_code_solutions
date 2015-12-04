@@ -4,17 +4,6 @@
 
 .class Program
 {	
-	.field private static string SECRET_KEY
-
-	.method static void .cctor()
-	{
-		.maxstack 1
-		
-		ldstr "pqrstuv"
-		stsfld string Program::SECRET_KEY
-
-		ret
-	}
 
 	.method private hidebysig static void Main(string[] args) cil managed
 	{
