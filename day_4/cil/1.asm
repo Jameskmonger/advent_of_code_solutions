@@ -10,7 +10,7 @@
 	{
 		.maxstack 1
 		
-		ldstr "input"
+		ldstr "pqrstuv1048970"
 		stsfld string Program::SECRET_KEY
 
 		ret
@@ -37,8 +37,8 @@
 		.locals init ([0] class [mscorlib]System.Security.Cryptography.MD5 md5,
 					[1] class [mscorlib]System.Text.Encoding enc,
 					[2] uint8[] bytes,
-					[3] class [mscorlib]System.Text.StringBuilder sb,
-					[4] int32 sb_ptr)
+					[3] int32 i,
+					[4] class [mscorlib]System.Text.StringBuilder sb)
 	
 		// Call the Create() method on MD5 and store it in 0
 		call class [mscorlib]System.Security.Cryptography.MD5 [mscorlib]System.Security.Cryptography.MD5::Create()
@@ -66,22 +66,22 @@
 		
 		// Instantiate a StringBuilder and store it in 3
 		newobj instance void [mscorlib]System.Text.StringBuilder::.ctor()
-		stloc.3
+		stloc.s sb
 		
 		// Instantiate the pointer as 0, and store in 4
 		ldc.i4.0
-		stloc.4
+		stloc.3
 		
-		START_LOOP: br.s CONTINUE_LOOP
+		br.s CONTINUE_LOOP
 		
 		// Get the StringBuilder
-		ldloc.3
+		START_LOOP: ldloc.s sb
 		
 		// Get the byte array
 		ldloc.2
 		
 		// Get the pointer
-		ldloc.4
+		ldloc.3
 		
 		// Load the byte at the given index
 		ldelema [mscorlib]System.Byte
@@ -97,15 +97,13 @@
 		pop
 		
 		// Load the pointer, the number 1, add them, then store them
-		ldloc.4
+		ldloc.3
 		ldc.i4.1
 		add
-		stloc.4
-		
-		CONTINUE_LOOP: nop
+		stloc.3
 		
 		// Load the pointer
-		ldloc.4
+		CONTINUE_LOOP: ldloc.3
 		
 		// Load the byte array
 		ldloc.2
@@ -116,9 +114,15 @@
 		// Compare the pointer and the length
 		clt
 		
+		// If they're not the same, then go back to the start
 		brtrue.s START_LOOP
 		
-		ldstr "we need to implement converting the hash back to a string"
+		// Otherwise, continue!
+		
+		// Load the stringbuilder
+		ldloc.s sb
+		
+		callvirt instance string [mscorlib]System.Object::ToString()
 		
 		ret
 	}
