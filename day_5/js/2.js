@@ -19,12 +19,31 @@ class Validator {
       return false;
     }
 
+    var alphabet = ['a', 'b', 'c', 'd', 'e',
+                  'f', 'g', 'h', 'i', 'j',
+                  'k', 'l', 'm', 'n', 'o',
+                  'p', 'q', 'r', 's', 't',
+                  'u', 'v', 'w', 'x', 'y',
+                  'z'];
+    var doubles = 0;
+    for (var l of alphabet) {
+      var exp = new RegExp(l, "g");
+      var count = (input.match(exp) || []).length;
+
+      if (count % 2 === 0) {
+        doubles += count;
+      }
+    }
+
+    if (doubles < 4) {
+      return false;
+    }
+
     return true;
   }
 }
 
-var input = `hello james
-i am a mouse`;
+var input = `qjhvhtzxzqqjkmpb`;
 
 var nice_count = 0;
 
