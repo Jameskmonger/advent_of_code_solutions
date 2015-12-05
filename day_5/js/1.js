@@ -23,7 +23,11 @@ class Validator {
       last_c = c;
     }
 
-    return contains_double;
+    if (!contains_double) {
+      return false;
+    }
+
+    return true;
   }
 }
 
