@@ -27,9 +27,22 @@ class Validator {
       return false;
     }
 
+    var vowels = ['a', 'e', 'i', 'o', 'u'];
+    var vowel_count = 0;
+    for (var v of vowels) {
+      var exp = new RegExp(v, "g");
+
+      var count = (input.match(exp) || []).length;
+      vowel_count += count;
+    }
+
+    if (vowel_count < 3) {
+      return false;
+    }
+
     return true;
   }
 }
 
 var v = new Validator();
-console.log(v.validate("hello james"));
+console.log(v.validate("hello jms"));
