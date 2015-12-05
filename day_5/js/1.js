@@ -44,5 +44,18 @@ class Validator {
   }
 }
 
+var input = `hello james
+i am a mouse`;
+
+var nice_count = 0;
+
 var v = new Validator();
-console.log(v.validate("hello jms"));
+for (var i of input.split('\n'))
+{
+  if (v.validate(i) === true)
+  {
+    nice_count++;
+  }
+}
+
+console.log(nice_count + " nice strings");
