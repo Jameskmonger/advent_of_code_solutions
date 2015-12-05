@@ -11,8 +11,21 @@ class Validator {
         return false;
       }
     }
+
+    var last_c = undefined;
+    var contains_double = false;
+    for (var c of input) {
+      if (c === last_c) {
+        contains_double = true;
+        break;
+      }
+
+      last_c = c;
+    }
+
+    return contains_double;
   }
 }
 
 var v = new Validator();
-console.log(v.validate("haegwjzuvuyypxyu"));
+console.log(v.validate("hello james"));
