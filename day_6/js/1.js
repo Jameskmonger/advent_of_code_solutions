@@ -51,17 +51,20 @@ function parseInstructions(input) {
 
     if (line.startsWith("turn off ")) {
       type = InstructionType.OFF;
+      line = line.slice(9);
     }
 
     if (line.startsWith("turn on ")) {
       type = InstructionType.ON;
+      line = line.slice(8);
     }
 
     if (line.startsWith("toggle ")) {
       type = InstructionType.TOGGLE;
+      line = line.slice(7);
     }
 
-    console.log(type);
+    console.log(line);
   }
 }
 
