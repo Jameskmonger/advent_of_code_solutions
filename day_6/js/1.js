@@ -9,12 +9,23 @@ var State = {
 
 class Light {
   constructor() {
-    this.state = State.ON;
+    this.state = State.OFF;
+  }
+
+  toggle() {
+    if (this.state === State.ON) {
+      this.state = State.OFF;
+      return;
+    } else if (this.state === State.OFF) {
+      this.state = State.ON;
+      return;
+    }
   }
 }
 
+var lights = [];
+
 function setupLights() {
-  var lights = [];
   for (var i = 0; i < SIZE; i++) {
     lights[i] = [];
 
@@ -81,6 +92,20 @@ function parseInstructions(input) {
   return instructions;
 }
 
+function applyInstruction(ins) {
+  for (var x = ins.start.x; x < ins.end.x; x++) {
+    for (var y = ins.start.y; y < ins.end.y; y++) {
+      if (ins.type === InstructionType.OFF) {
+        lights[x][y].state = State.OFF;
+      } else if (ins.type === InstructionType.ON) {
+        lights[x][y].state = State.ON;
+      } else if (ins.type === InstructionType.TOGGLE) {
+        lights[x][y].toggle();
+      }
+    }
+  }
+}
+
 setupLights();
 
 var input = `turn off 199,133 through 461,193
@@ -89,4 +114,6 @@ turn on 226,196 through 599,390`;
 
 var instructions = parseInstructions(input);
 
-console.log(instructions);
+for (var i of instructions) {
+  applyInstruction(i);
+}
