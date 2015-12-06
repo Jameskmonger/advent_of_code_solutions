@@ -25,9 +25,11 @@ function setupLights() {
 }
 
 class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor(str) {
+    var parts = str.split(',');
+
+    this.x = parts[0];
+    this.y = parts[1];
   }
 }
 
@@ -46,6 +48,8 @@ class Instruction {
 }
 
 function parseInstructions(input) {
+  var instructions = [];
+
   for (var line of input.split('\n')) {
     var type = undefined;
 
@@ -64,8 +68,17 @@ function parseInstructions(input) {
       line = line.slice(7);
     }
 
-    console.log(line);
+    var parts = line.split(" through ");
+
+    var start = new Point(parts[0]);
+    var end = new Point(parts[1]);
+
+    var ins = new Instruction(type, start, end);
+
+    instructions.push(ins);
   }
+
+  return instructions;
 }
 
 setupLights();
@@ -74,4 +87,6 @@ var input = `turn off 199,133 through 461,193
 toggle 322,558 through 977,958
 turn on 226,196 through 599,390`;
 
-parseInstructions(input);
+var instructions = parseInstructions(input);
+
+console.log(instructions);
