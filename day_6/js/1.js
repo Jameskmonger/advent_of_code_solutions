@@ -108,12 +108,22 @@ function applyInstruction(ins) {
 
 setupLights();
 
-var input = `turn off 199,133 through 461,193
-toggle 322,558 through 977,958
-turn on 226,196 through 599,390`;
+var input = `turn on 0,0 through 15,10`;
 
 var instructions = parseInstructions(input);
 
 for (var i of instructions) {
   applyInstruction(i);
 }
+
+var lights_on = 0;
+
+for (var row of lights) {
+  for (var light of row) {
+    if (light.state === State.ON) {
+      lights_on++;
+    }
+  }
+}
+
+console.log(lights_on);
