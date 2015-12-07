@@ -81,7 +81,7 @@ while (lines.length > 0) {
       if (wires[from] === undefined) {
         processed = false;
       } else {
-        wires[parsed[2]] = 65536 + (~ wires[parsed[1]]);
+        wires[parsed[2]] = (~ wires[parsed[1]]) & 0xFFFF;
 
         processed = true;
       }
