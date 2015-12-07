@@ -8,19 +8,20 @@ for (var i = 0; i < GRID_SIZE; i++) {
   lights[i] = [];
 }
 
-var exp = /^(\bturn off \b|\btoggle \b|\bturn on \b)(\d+),(\d+)(\b through \b)(\d+),(\d+)/gm;
+var exp = /^(\bturn off \b|\btoggle \b|\bturn on \b)(\d+),(\d+)(\b through \b)(\d+),(\d+)/;
 
-var input = ``;
+var input = `turn on 0,0 through 9,9
+turn on 95,95 through 100,100`;
 
 class Point {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    this.x = parseInt(x);
+    this.y = parseInt(y);
   }
 }
 
 for (var line of input.split('\n')) {
-  var parsed = exp.exec(input);
+  var parsed = exp.exec(line);
 
   var instruction = parsed[1];
 
@@ -41,9 +42,9 @@ for (var line of input.split('\n')) {
 }
 
 var on_count = 0;
-for (var row of lights) {
-  for (var light of row) {
-    if (light === true) {
+for (var x = 0; x < 1000; x++) {
+  for (var y = 0; y <= 1000; y++) {
+    if (lights[x][y]) {
       on_count++;
     }
   }
