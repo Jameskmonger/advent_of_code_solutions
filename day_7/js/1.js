@@ -52,7 +52,12 @@ for (var l of lines) {
       wires[to] = wires[left] >> right;
     }
   } else if (l.match(NOT_REGEX)) {
-    console.log("not: " + l);
+    var parsed = NOT_REGEX.exec(l);
+
+    var from = parsed[1];
+    var to = parsed[2];
+
+    wires[parsed[2]] = 65536 + (~ wires[parsed[1]]);
   }
 }
 
