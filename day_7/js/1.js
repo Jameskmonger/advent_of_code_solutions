@@ -22,11 +22,22 @@ for (var l of lines) {
   if (l.match(ASSIGN_REGEX)) {
     var parsed = ASSIGN_REGEX.exec(l);
 
-    var val = parsed[1];
-    var ind = parsed[2];
-    wires[ind] = val;
+    wires[parsed[2]] = parsed[1];
   } else if (l.match(AND_OR_REGEX)) {
-    console.log("and or: " + l);
+    var parsed = AND_OR_REGEX.exec(l);
+
+    var instruction = parsed[2];
+
+    var left = parsed[1];
+    var right = parsed[3];
+    var to = parsed[4];
+
+    if (instruction === " AND ") {
+      wires[to] = wires[left] & wires[right];
+    } else if (instruction === " OR ") {
+      wires[to] = wires[left] | wires[right];
+    }
+    console.log(parsed);
   } else if (l.match(SHIFT_REGEX)) {
     console.log("shift: " + l);
   } else if (l.match(NOT_REGEX)) {
