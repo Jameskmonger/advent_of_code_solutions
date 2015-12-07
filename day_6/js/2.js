@@ -4,8 +4,12 @@ const GRID_SIZE = 1000;
 
 var lights = [];
 
-for (var i = 0; i < GRID_SIZE; i++) {
-  lights[i] = [];
+for (var x = 0; x < GRID_SIZE; x++) {
+  lights[x] = [];
+
+  for (var y = 0; y < GRID_SIZE; y++) {
+    lights[x][y] = 0;
+  }
 }
 
 var exp = /^(\bturn off \b|\btoggle \b|\bturn on \b)(\d+),(\d+)(\b through \b)(\d+),(\d+)/;
