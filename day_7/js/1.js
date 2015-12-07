@@ -1,6 +1,7 @@
 "use strict";
 
-var input = "";
+var input = `123 -> a
+NOT a -> b`;
 
 var lines = input.split('\n');
 
@@ -77,7 +78,7 @@ while (lines.length > 0) {
       if (wires[from] === undefined) {
         processed = false;
       } else {
-        wires[parsed[2]] = 65536 + (~ wires[parsed[1]]);
+        wires[parsed[2]] = (~ wires[parsed[1]]) & 0xFFFF;
 
         processed = true;
       }
@@ -119,4 +120,4 @@ while (lines.length > 0) {
   }
 }
 
-console.log(wires['a']);
+console.log(wires.a);
