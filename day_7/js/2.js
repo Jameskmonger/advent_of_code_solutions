@@ -25,7 +25,11 @@ while (lines.length > 0) {
     if (l.match(ASSIGN_REGEX)) {
       var parsed = ASSIGN_REGEX.exec(l);
 
-      wires[parsed[2]] = parsed[1];
+      if (parsed[2] === 'b') {
+        wires['b'] = 3176;
+      } else {
+        wires[parsed[2]] = parsed[1];
+      }
 
       processed = true;
     } else if (l.match(AND_OR_REGEX)) {
