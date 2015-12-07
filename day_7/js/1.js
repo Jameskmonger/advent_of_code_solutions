@@ -37,7 +37,6 @@ for (var l of lines) {
     } else if (instruction === " OR ") {
       wires[to] = wires[left] | wires[right];
     }
-    console.log(parsed);
   } else if (l.match(SHIFT_REGEX)) {
     console.log("shift: " + l);
   } else if (l.match(NOT_REGEX)) {
