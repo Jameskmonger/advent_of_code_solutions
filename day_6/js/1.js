@@ -10,7 +10,7 @@ for (var i = 0; i < GRID_SIZE; i++) {
 
 var exp = /^(\bturn off \b|\btoggle \b|\bturn on \b)(\d+),(\d+)(\b through \b)(\d+),(\d+)/gm;
 
-var input = `turn on 0,0 through 2,2`;
+var input = ``;
 
 class Point {
   constructor(x, y) {
@@ -40,6 +40,17 @@ for (var line of input.split('\n')) {
   }
 }
 
+var on_count = 0;
+for (var row of lights) {
+  for (var light of row) {
+    if (light === true) {
+      on_count++;
+    }
+  }
+}
+
+console.log(on_count + " lights are on");
+
 function turnOn (start, end) {
   for (var x = start.x; x <= end.x; x++) {
     for (var y = start.y; y <= end.y; y++) {
@@ -51,7 +62,7 @@ function turnOn (start, end) {
 function turnOff (start, end) {
   for (var x = start.x; x <= end.x; x++) {
     for (var y = start.y; y <= end.y; y++) {
-      lights[x][y] = true;
+      lights[x][y] = false;
     }
   }
 }
