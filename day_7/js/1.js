@@ -16,9 +16,15 @@ var AND_OR_REGEX = /^([a-zA-Z]+)(\b AND \b|\b OR \b)([a-zA-z]+)\b -> \b([a-zA-z]
 var SHIFT_REGEX = /^([a-zA-Z]+)(\b LSHIFT \b|\b RSHIFT \b)(\d+)\b -> \b([a-zA-z]+)/gm
 var NOT_REGEX = /^\bNOT \b([a-zA-z]+)\b -> \b([a-zA-z]+)/gm
 
+var wires = [];
+
 for (var l of lines) {
   if (l.match(ASSIGN_REGEX)) {
-    console.log("assign: " + l);
+    var parsed = ASSIGN_REGEX.exec(l);
+
+    var val = parsed[1];
+    var ind = parsed[2];
+    wires[ind] = val;
   } else if (l.match(AND_OR_REGEX)) {
     console.log("and or: " + l);
   } else if (l.match(SHIFT_REGEX)) {
@@ -27,3 +33,5 @@ for (var l of lines) {
     console.log("not: " + l);
   }
 }
+
+console.log(wires);
