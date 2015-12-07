@@ -67,7 +67,11 @@ function turnOn (start, end) {
 function turnOff (start, end) {
   for (var x = start.x; x <= end.x; x++) {
     for (var y = start.y; y <= end.y; y++) {
-      lights[x][y] = false;
+      if (lights[x][y] > 0) {
+        lights[x][y] -= 1;
+      } else {
+        lights[x][y] = 0;
+      }
     }
   }
 }
