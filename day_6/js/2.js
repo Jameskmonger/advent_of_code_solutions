@@ -79,13 +79,7 @@ function turnOff (start, end) {
 function toggle (start, end) {
   for (var x = start.x; x <= end.x; x++) {
     for (var y = start.y; y <= end.y; y++) {
-      if (lights[x][y] === true) {
-        lights[x][y] = false;
-        continue;
-      } else {
-        lights[x][y] = true;
-        continue;
-      }
+      lights[x][y] += 2;
     }
   }
 }
