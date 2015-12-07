@@ -59,7 +59,7 @@ console.log(on_count + " lights are on");
 function turnOn (start, end) {
   for (var x = start.x; x <= end.x; x++) {
     for (var y = start.y; y <= end.y; y++) {
-      lights[x][y] = true;
+      lights[x][y] += 1;
     }
   }
 }
