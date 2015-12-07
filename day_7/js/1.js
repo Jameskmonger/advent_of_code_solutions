@@ -15,13 +15,13 @@ var input = "";
 
 var lines = input.split('\n');
 
-var ASSIGN_REGEX = /^(\d+)\b -> \b([a-zA-Z]+)/gm
-var AND_OR_REGEX = /^([a-zA-Z]+)(\b AND \b|\b OR \b)([a-zA-z]+)\b -> \b([a-zA-z]+)/gm
-var SHIFT_REGEX = /^([a-zA-Z]+)(\b LSHIFT \b|\b RSHIFT \b)(\d+)\b -> \b([a-zA-z]+)/gm
-var NOT_REGEX = /^\bNOT \b([a-zA-z]+)\b -> \b([a-zA-z]+)/gm
+var ASSIGN_REGEX = /^(\d+)\b -> \b([a-zA-Z]+)/gm;
+var AND_OR_REGEX = /^([a-zA-Z]+)(\b AND \b|\b OR \b)([a-zA-z]+)\b -> \b([a-zA-z]+)/gm;
+var SHIFT_REGEX = /^([a-zA-Z]+)(\b LSHIFT \b|\b RSHIFT \b)(\d+)\b -> \b([a-zA-z]+)/gm;
+var NOT_REGEX = /^\bNOT \b([a-zA-z]+)\b -> \b([a-zA-z]+)/gm;
 
-var NUMERIC_AND_REGEX = /^(\d+)\b AND \b([a-zA-Z]+)\b -> \b([a-zA-Z]+)/gm
-var WIRE_ASSIGN_REGEX = /^([a-zA-Z]+)\b -> \b([a-zA-Z]+)/gm
+var NUMERIC_AND_REGEX = /^(\d+)\b AND \b([a-zA-Z]+)\b -> \b([a-zA-Z]+)/gm;
+var WIRE_ASSIGN_REGEX = /^([a-zA-Z]+)\b -> \b([a-zA-Z]+)/gm;
 
 var wires = [];
 
