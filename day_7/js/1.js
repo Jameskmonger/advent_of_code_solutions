@@ -38,7 +38,19 @@ for (var l of lines) {
       wires[to] = wires[left] | wires[right];
     }
   } else if (l.match(SHIFT_REGEX)) {
-    console.log("shift: " + l);
+    var parsed = SHIFT_REGEX.exec(l);
+
+    var direction = parsed[2];
+
+    var left = parsed[1];
+    var right = parsed[3];
+    var to = parsed[4];
+
+    if (direction === " LSHIFT ") {
+      wires[to] = wires[left] << right;
+    } else if (direction === " RSHIFT ") {
+      wires[to] = wires[left] >> right;
+    }
   } else if (l.match(NOT_REGEX)) {
     console.log("not: " + l);
   }
