@@ -1,12 +1,13 @@
-let word = "(())";;
+let input = "((((())";;
 
-let dir = function
-  | '(' -> 1
-  | ')' -> -1
-  | _ -> 0;;
+let calc_flr str =
+  let len = String.length str in
+    let rec loop flr ptr =
+      if ptr < len then match str.[ptr] with
+        | '(' -> loop (flr + 1) (ptr + 1)
+        | ')' -> loop (flr - 1) (ptr + 1)
+        | _ -> loop flr (ptr + 1)
+      else flr in
+        loop 0 0;;
 
-let z =
-  (String.iter (fun (c: char) ->
-    let d = dir c in
-      Printf.printf "%d is the direction of %c\n" d c
-  ) word);;
+Printf.printf "You are on floor %d\n" (calc_flr input);;
