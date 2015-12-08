@@ -10,7 +10,7 @@ fs.readFile(".INPUTFILE", "utf8", function (err, data) {
 
   var get_string_characters = getStringCharacters(lines);
 
-  console.log(code_characters - get_string_characters);
+  console.log((code_characters - get_string_characters) + "   (" + code_characters + " - " + get_string_characters + ")");
 });
 
 function getCodeCharacters(input) {
@@ -26,13 +26,11 @@ function getStringCharacters(input) {
 
   input.forEach(line => {
     var l = line.substring(1, line.length - 1);
-    l = l.replace(/\\\\/g, "\\");
-    l = l.replace(/\\\"/g, "\"");
+    l = l.replace(/\\\\/g, "A");
+    l = l.replace(/\\\"/g, "B");
     l = l.replace(/\\x([0-9A-Fa-f]{2})/g, function() {
         return String.fromCharCode(parseInt(arguments[1], 16));
     });
-
-    console.log(l);
 
     count += l.length;
   });
