@@ -26,11 +26,13 @@ function getStringCharacters(input) {
 
   input.forEach(line => {
     var l = line.substring(1, line.length - 1);
-    l = l.replace("\\\\", "\\");
-    l = l.replace("\\\"", "\"");
+    l = l.replace(/\\\\/g, "\\");
+    l = l.replace(/\\\"/g, "\"");
     l = l.replace(/\\x([0-9A-Fa-f]{2})/g, function() {
         return String.fromCharCode(parseInt(arguments[1], 16));
     });
+
+    console.log(l);
 
     count += l.length;
   });
