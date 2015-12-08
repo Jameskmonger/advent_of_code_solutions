@@ -2,13 +2,14 @@ let word = "(())";;
 
 let f = 0;;
 
-let process c =
-  if c = '(' then
-    Printf.printf "u%c\n" c
+let dir i : int =
+  if i = '(' then
+    1
   else
-    Printf.printf "d%c\n" c
+    -1
   ;;
 
-let calc word = String.iter process word;;
+let process c =
+  Printf.printf "%d\n" (dir c);;
 
-calc word;;
+String.iter process word;;
