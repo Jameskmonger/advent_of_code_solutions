@@ -49,8 +49,10 @@ var locations = Object.keys(routes);
 // We need a value as our initial "minimum" - integer top bound will do
 var min = Number.MAX_SAFE_INTEGER;
 
+// An array to store how many times we've had each result
 var results = [];
 
+// Keep going until broken
 while (true) {
   // Shuffle the locations so we can brute force
   locations = shuffle(locations);
@@ -68,12 +70,15 @@ while (true) {
   // What's shorter? Our current minimum, or our current length?
   min = Math.min(min, length);
 
+  // If we haven't had any results for our current result, set it as 0
   if (results[min] === undefined) {
     results[min] = 0;
   }
 
+  // Increment by 1
   results[min]++;
 
+  // If we've had this answer more than (locations * 10) times, assume it's right
   if (results[min] > (locations.length * 10)) {
     break;
   }
