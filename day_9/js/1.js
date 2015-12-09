@@ -49,8 +49,9 @@ var locations = Object.keys(routes);
 // We need a value as our initial "minimum" - integer top bound will do
 var min = Number.MAX_SAFE_INTEGER;
 
-// 100000 is an arbitrary number
-for (var i = 0; i < 100000; i++) {
+var results = [];
+
+while (true) {
   // Shuffle the locations so we can brute force
   locations = shuffle(locations);
 
@@ -66,6 +67,16 @@ for (var i = 0; i < 100000; i++) {
 
   // What's shorter? Our current minimum, or our current length?
   min = Math.min(min, length);
+
+  if (results[min] === undefined) {
+    results[min] = 0;
+  }
+
+  results[min]++;
+
+  if (results[min] > (locations.length * 10)) {
+    break;
+  }
 }
 
 console.log(min);
