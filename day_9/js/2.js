@@ -49,8 +49,11 @@ var locations = Object.keys(routes);
 // We need a value as our initial "maximum" - 0 will do
 var max = 0;
 
-// 100000 is an arbitrary number
-for (var i = 0; i < 100000; i++) {
+// An array to store how many times we've had each result
+var results = [];
+
+// Keep going until broken
+while (true) {
   // Shuffle the locations so we can brute force
   locations = shuffle(locations);
 
@@ -66,6 +69,19 @@ for (var i = 0; i < 100000; i++) {
 
   // What's longer? Our current maximum, or our current length?
   max = Math.max(max, length);
+
+  // If we haven't had any results for our current result, set it as 0
+  if (results[max] === undefined) {
+    results[max] = 0;
+  }
+
+  // Increment by 1
+  results[max]++;
+
+  // If we've had this answer more than (locations * 10) times, assume it's right
+  if (results[max] > (locations.length * 10)) {
+    break;
+  }
 }
 
 console.log(max);
