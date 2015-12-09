@@ -1,28 +1,28 @@
+"use strict";
+
 var input = `London to Dublin = 464
 London to Belfast = 518
 Dublin to Belfast = 141`;
 
 var lines = input.split('\n');
 
-var path = [],
-    locations = [];
+var locations = {};
 
-function setDistance(a, b, distance) {
-  if (path[a] === undefined) {
-    path[a] = [];
+class Location {
+  constructor(name) {
+    this.name = name;
+
+    this.links = [];
   }
 
-  if (path[b] === undefined) {
-    path[b] = [];
+  addLink(name, dist) {
+    this.links[name] = dist;
   }
-
-  path[a][b] = parseInt(distance);
-  path[b][a] = parseInt(distance);
 }
 
-function registerLocation(loc) {
-  if (locations.indexOf(loc) === -1) {
-    locations.push(loc);
+class Link {
+  constructor(dist) {
+    this.dist = parseInt(dist);
   }
 }
 
@@ -35,12 +35,21 @@ for (var line of lines) {
       b = parsed[2],
       dist = parsed[3];
 
-  registerLocation(a);
-  registerLocation(b);
+  if (locations[a] === undefined) {
+    locations[a] = new Location(a);
+  }
 
-  setDistance(a, b, dist);
+  if (locations[b] === undefined) {
+    locations[b] = new Location(b);
+  }
+
+  var l = new Link(dist);
+  locations[a].addLink(locations[b].name, l);
+  locations[b].addLink(locations[a].name, l);
 }
 
-for (var loc of locations) {
-  console.log(loc);
+for (var i in locations) {
+  var me = locations[i];
+
+  console.log(me);
 }
