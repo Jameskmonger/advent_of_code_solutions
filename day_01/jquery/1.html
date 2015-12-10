@@ -1,9 +1,25 @@
 <!doctype HTML>
 <html>
 <head>
-
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
 
+<form id="inputForm">
+    Input: <input type="text" />
+    <input type="submit" value="Process Input" />
+</form>
+
+<script type='text/javascript'>
+  $(document).ready(function() {
+    $("#inputForm > input[type=submit]").click(function(event) {
+      event.preventDefault()
+
+      var data = $("#inputForm > input[type=text]");
+
+      console.log(data.val());
+    });
+  });
+</script>
 </body>
 </html>
