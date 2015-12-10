@@ -35,17 +35,44 @@
     $("#DOWN_CONSTANT").hide();
 
     $("#inputForm > input[type=submit]").click(function(event) {
+      $(".floor.move-up").remove();
+      $(".floor.move-down").remove();
+
       event.preventDefault()
 
       var data = $("#inputForm > input[type=text]").val();
 
-      for (var c of data) {
-        if (c === $("#UP_CONSTANT").text()) {
-          $("<div class='floor move-up'></div>").appendTo("body");
-        } else if (c === $("#DOWN_CONSTANT").text()) {
-          $("<div class='floor move-down'></div>").appendTo("body");
-        }
+      var ptr = 0;
+
+      function loop() {
+        setTimeout(function() {
+          if (data[ptr] === $("#UP_CONSTANT").text()) {
+            $("<div class='floor move-up'></div>").appendTo("body");
+          } else if (data[ptr] === $("#DOWN_CONSTANT").text()) {
+            $("<div class='floor move-down'></div>").appendTo("body");
+          }
+
+          $("html, body").scrollTop($(document).height());
+
+          ptr++;
+
+          if (ptr < data.length) {
+            loop();
+          } else {
+            var final_floor = $(".floor.move-up").length - $(".floor.move-down").length;
+
+            $("#inputForm > input[type=text]").val("");
+
+            $("<div id='final'>You are on floor " + final_floor + "</div>").appendTo("body");
+
+            $("html, body").scrollTop($(document).height());
+          }
+        }, 5);
       }
+
+      loop();
+
+
     });
   });
 </script>
