@@ -1,5 +1,9 @@
 "use strict";
 
+String.prototype.repeat = function(num) {
+    return new Array(num + 1).join(this);
+};
+
 // Find out the indexes where the string needs splitting
 function getSplitIndexes(str) {
   // Initialise the last checked character as the first in the string
@@ -34,10 +38,26 @@ function getParts(str) {
       parts.push(str.substring(now, next));
     }
   }
+
+  return parts;
 }
 
 function process(str) {
   var parts = getParts(str);
+
+  var output = "";
+
+  for (var part of parts) {
+    output += (part.length + "" + part[0]);
+  }
+
+  return output;
 }
 
-process("111223333");
+var input = "1113122113";
+
+for (var i = 0; i < 40; i++) {
+  input = process(input);
+}
+
+console.log(input.length);
