@@ -25,9 +25,9 @@
 
       for (var c of data) {
         if (c === $("#UP_CONSTANT").text()) {
-
+          $("<div class='floor move-up'></div>").appendTo("body");
         } else if (c === $("#DOWN_CONSTANT").text()) {
-          
+          $("<div class='floor move-down'></div>").appendTo("body");
         }
       }
     });
