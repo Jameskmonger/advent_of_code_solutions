@@ -12,12 +12,16 @@
 
 <script type='text/javascript'>
   $(document).ready(function() {
+    $("<div id='UP_CONSTANT'>(</div>").appendTo("body");
+    $("<div id='DOWN_CONSTANT'>)</div>").appendTo("body");
+
+    $("#UP_CONSTANT").hide();
+    $("#DOWN_CONSTANT").hide();
+
     $("#inputForm > input[type=submit]").click(function(event) {
       event.preventDefault()
 
-      var data = $("#inputForm > input[type=text]");
-
-      console.log(data.val());
+      var data = $("#inputForm > input[type=text]").val();
     });
   });
 </script>
