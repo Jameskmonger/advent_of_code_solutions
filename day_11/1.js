@@ -8,6 +8,14 @@ function reverse(str) {
   return str.split('').reverse().join('');
 }
 
+String.prototype.replaceAt = function(index, character) {
+    return this.substr(0, index) + character + this.substr(index + character.length);
+};
+
+function insertFirstCharacter(string, position) {
+  return [string.slice(0, position), 'a', string.slice(position)].join('');
+}
+
 function getCharacterIndex(char) {
   return alphabet.indexOf(char);
 }
@@ -31,7 +39,7 @@ function incrementString(str) {
 
   var i = 0;
   while (true) {
-    console.log(backwards[i]);
+    backwards = backwards.replaceAt(i, getNextCharacter(backwards[i]));
 
     i++;
 
@@ -39,6 +47,8 @@ function incrementString(str) {
       break;
     }
   }
+
+  return reverse(backwards);
 }
 
-incrementString("james");
+console.log(incrementString("abcdefg"));
