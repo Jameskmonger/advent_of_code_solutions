@@ -3,3 +3,9 @@ var alphabet = ['a','b','c','d','e',
                 'k','l','m','n','o',
                 'p','q','r','s','t',
                 'u','v','w','x','y','z'];
+
+function getCharacterIndex(char) {
+  return alphabet.indexOf(char);
+}
+
+console.log(getCharacterIndex("a") + " " + getCharacterIndex("z"));
