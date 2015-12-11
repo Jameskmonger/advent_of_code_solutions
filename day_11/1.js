@@ -4,6 +4,10 @@ var alphabet = ['a','b','c','d','e',
                 'p','q','r','s','t',
                 'u','v','w','x','y','z'];
 
+function reverse(str) {
+  return str.split('').reverse().join('');
+}
+
 function getCharacterIndex(char) {
   return alphabet.indexOf(char);
 }
@@ -22,7 +26,19 @@ function getNextCharacter(char) {
   return alphabet[index + 1];
 }
 
-console.log(getNextCharacter("a"));
-console.log(getNextCharacter("b"));
-console.log(getNextCharacter("y"));
-console.log(getNextCharacter("z"));
+function incrementString(str) {
+  var backwards = reverse(str);
+
+  var i = 0;
+  while (true) {
+    console.log(backwards[i]);
+
+    i++;
+
+    if (i >= backwards.length) {
+      break;
+    }
+  }
+}
+
+incrementString("james");
