@@ -51,4 +51,13 @@ function incrementString(str) {
   return reverse(backwards);
 }
 
-console.log(incrementString("xz"));
+function isValid(str) {
+  if (str.indexOf('i') !== -1 || str.indexOf('o') !== -1 || str.indexOf('l') !== -1) {
+    return false;
+  }
+
+  return true;
+}
+
+console.log(isValid("hijklmmn"));
+console.log(isValid("abbceffg"));
