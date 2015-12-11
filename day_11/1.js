@@ -67,7 +67,26 @@ function isValid(str) {
     return false;
   }
 
+  var chain_found = false;
+  for (var a = 0; a < alphabet.length - 2; a++) {
+    var check = (alphabet[a] + alphabet[a + 1] + alphabet[a + 2]);
+
+    if (str.indexOf(check) !== -1) {
+      chain_found = true;
+    }
+  }
+
+  if (!chain_found) {
+    return false;
+  }
+
   return true;
 }
 
-console.log(isValid("abbceffg"));
+var current_password = "abcdefgh";
+
+while (!isValid(current_password)) {
+  current_password = incrementString(current_password);
+}
+
+console.log(current_password);
