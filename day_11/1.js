@@ -8,4 +8,21 @@ function getCharacterIndex(char) {
   return alphabet.indexOf(char);
 }
 
-console.log(getCharacterIndex("a") + " " + getCharacterIndex("z"));
+function getAlphabetSize() {
+  return alphabet.length;
+}
+
+function getNextCharacter(char) {
+  var index = getCharacterIndex(char);
+
+  if (index === getAlphabetSize() - 1) {
+    return alphabet[0];
+  }
+
+  return alphabet[index + 1];
+}
+
+console.log(getNextCharacter("a"));
+console.log(getNextCharacter("b"));
+console.log(getNextCharacter("y"));
+console.log(getNextCharacter("z"));
