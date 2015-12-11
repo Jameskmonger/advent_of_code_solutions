@@ -56,8 +56,18 @@ function isValid(str) {
     return false;
   }
 
+  var pairs = 0;
+  for (var i = 0; i < alphabet.length; i++) {
+    var exp = new RegExp(alphabet[i] + '' + alphabet[i], "g");
+
+    pairs += (str.match(exp) || []).length;
+  }
+
+  if (pairs < 2) {
+    return false;
+  }
+
   return true;
 }
 
-console.log(isValid("hijklmmn"));
 console.log(isValid("abbceffg"));
