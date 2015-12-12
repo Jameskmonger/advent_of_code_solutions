@@ -9,7 +9,7 @@ function processProperties(obj) {
 
       if (typeof val === "number") {
         count += parseInt(val);
-      } else {
+      } else if (typeof val !== "string") {
         processProperties(val);
       }
     }
