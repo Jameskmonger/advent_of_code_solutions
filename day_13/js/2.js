@@ -110,4 +110,6 @@ function calculateHighestChange() {
 createPeople();
 storePreferences();
 
+people.push(new Person("local_person"));
+
 console.log(calculateHighestChange());
