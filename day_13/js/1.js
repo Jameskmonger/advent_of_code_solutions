@@ -1,3 +1,5 @@
+"use strict";
+
 var input = `Alice would gain 54 happiness units by sitting next to Bob.
 Alice would lose 79 happiness units by sitting next to Carol.
 Alice would lose 2 happiness units by sitting next to David.
@@ -11,7 +13,30 @@ David would gain 46 happiness units by sitting next to Alice.
 David would lose 7 happiness units by sitting next to Bob.
 David would gain 41 happiness units by sitting next to Carol.`;
 
+class Person {
+  constructor(name) {
+    this.name = name;
+    this.preferences = [];
+  }
+
+  addPreference(person, change) {
+    var pref = new Preference(person, change);
+    this.preferences.push(pref);
+  }
+}
+
+class Preference {
+  constructor(person, change) {
+    this.person = person;
+    this.change = change;
+  }
+}
+
 var people = [];
+
+function personStored(name) {
+  return (people.filter((p) => p.name === name).length === 1);
+}
 
 function createPeople() {
   for (var line of input.split('\n')) {
@@ -19,12 +44,12 @@ function createPeople() {
     var first = parts[0];
     var last = parts[parts.length - 1].replace('.', '');
 
-    if (people.indexOf(first) === -1) {
-      people.push(first);
+    if (!personStored(first)) {
+      people.push(new Person(first));
     }
 
-    if (people.indexOf(last) === -1) {
-      people.push(last);
+    if (!personStored(last)) {
+      people.push(new Person(last));
     }
   }
 }
@@ -40,8 +65,12 @@ function storePreferences() {
     if (modifier === "lose") {
       change = change * -1;
     }
+
+
   }
 }
 
 createPeople();
 storePreferences();
+
+console.log(people);
