@@ -38,6 +38,10 @@ function personStored(name) {
   return (people.filter((p) => p.name === name).length === 1);
 }
 
+function getPersonForName(name) {
+  return people.filter((p) => p.name === name)[0];
+}
+
 function createPeople() {
   for (var line of input.split('\n')) {
     var parts = line.split(' ');
@@ -57,8 +61,8 @@ function createPeople() {
 function storePreferences() {
   for (var line of input.split('\n')) {
     var parts = line.split(' ');
-    var first = parts[0],
-        last = parts[parts.length - 1].replace('.', ''),
+    var first = getPersonForName(parts[0]),
+        last = getPersonForName(parts[parts.length - 1].replace('.', '')),
         modifier = parts[2],
         change = parseInt(parts[3]);
 
@@ -66,7 +70,7 @@ function storePreferences() {
       change = change * -1;
     }
 
-
+    first.addPreference(last, change);
   }
 }
 
