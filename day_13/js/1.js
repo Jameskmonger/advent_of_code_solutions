@@ -29,6 +29,19 @@ function createPeople() {
   }
 }
 
-createPeople();
+function storePreferences() {
+  for (var line of input.split('\n')) {
+    var parts = line.split(' ');
+    var first = parts[0],
+        last = parts[parts.length - 1].replace('.', ''),
+        modifier = parts[2],
+        change = parseInt(parts[3]);
 
-console.log(people);
+    if (modifier === "lose") {
+      change = change * -1;
+    }
+  }
+}
+
+createPeople();
+storePreferences();
