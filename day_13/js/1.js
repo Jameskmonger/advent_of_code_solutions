@@ -13,6 +13,8 @@ David would gain 46 happiness units by sitting next to Alice.
 David would lose 7 happiness units by sitting next to Bob.
 David would gain 41 happiness units by sitting next to Carol.`;
 
+function permutator(n){function t(n,r){for(var e,r=r||[],o=0;o<n.length;o++)e=n.splice(o,1),0===n.length&&c.push(r.concat(e)),t(n.slice(),r.concat(e)),n.splice(o,0,e[0]);return c}var c=[];return t(n)}
+
 class Person {
   constructor(name) {
     this.name = name;
@@ -77,4 +79,19 @@ function storePreferences() {
 createPeople();
 storePreferences();
 
-console.log(people);
+var highestChange = -99999999;
+
+permutator(people).forEach(function(order, x) {
+  var totalHappinessChange = 0;
+
+  for (var i = 0; i < order.length; i++) {
+    var person = order[i];
+    var before = order[(i - 1 + order.length) % order.length];
+    var after = order[(i + 1) % order.length];
+
+    var before_change = person.preferences.filter((p) => p.person.name === before.name)[0].change;
+    var after_change = person.preferences.filter((p) => p.person.name === after.name)[0].change;
+  }
+});
+
+console.log(highestChange);
