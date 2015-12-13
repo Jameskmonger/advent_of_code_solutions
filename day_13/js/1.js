@@ -82,7 +82,7 @@ storePreferences();
 var highestChange = -99999999;
 
 permutator(people).forEach(function(order, x) {
-  var totalHappinessChange = 0;
+  var permutationChange = 0;
 
   for (var i = 0; i < order.length; i++) {
     var person = order[i];
@@ -91,7 +91,11 @@ permutator(people).forEach(function(order, x) {
 
     var before_change = person.preferences.filter((p) => p.person.name === before.name)[0].change;
     var after_change = person.preferences.filter((p) => p.person.name === after.name)[0].change;
+
+    permutationChange += before_change + after_change;
   }
+
+  highestChange = Math.max(highestChange, permutationChange);
 });
 
 console.log(highestChange);
