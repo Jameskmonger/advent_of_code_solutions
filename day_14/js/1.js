@@ -4,7 +4,8 @@ const STATE_FLYING = 1;
 const STATE_RESTING = 2;
 
 class Reindeer {
-  constructor(speed, stamina, rest) {
+  constructor(name, speed, stamina, rest) {
+    this.name = name;
     this.speed = speed;
     this.stamina = stamina;
     this.rest = rest;
@@ -13,3 +14,7 @@ class Reindeer {
     this.time = this.stamina;
   }
 }
+
+var reindeer = [];
+reindeer.push(new Reindeer("Comet", 14, 10, 127));
+reindeer.push(new Reindeer("Dancer", 16, 11, 162));
