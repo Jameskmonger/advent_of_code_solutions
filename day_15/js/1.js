@@ -20,10 +20,22 @@ var ingredients = [];
 
 function maximumScore() {
   //while(true) {
-    var ratios = generate(SPOON_COUNT, INGREDIENT_COUNT);
+    //var ratios = generate(SPOON_COUNT, INGREDIENT_COUNT);
+    var ratios = [44, 56];
+
+    var properties = { "capacity": 0, "durability": 0, "flavor": 0, "texture": 0 };
+
     for (var i in ratios) {
-      console.log(ingredients[i].name + " has " + ratios[i]);
+      var ing = ingredients[i], rat = ratios[i];
+      properties.capacity += (rat * ing.capacity);
+      properties.durability += (rat * ing.durability);
+      properties.flavor += (rat * ing.flavor);
+      properties.texture += (rat * ing.texture);
     }
+
+    var score = (properties.capacity * properties.durability * properties.flavor * properties.texture);
+
+    console.log(score);
   //}
 }
 
