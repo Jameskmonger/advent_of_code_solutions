@@ -1,7 +1,8 @@
 "use strict";
 
 class Ingredient {
-  constructor(capacity, durability, flavor, texture, calories) {
+  constructor(name, capacity, durability, flavor, texture, calories) {
+    this.name = name;
     this.capacity = parseInt(capacity);
     this.durability = parseInt(durability);
     this.flavor = parseInt(flavor);
@@ -10,15 +11,41 @@ class Ingredient {
   }
 }
 
-var lines = `Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
+const lines = `Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
 Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3`.split('\n');
+const SPOON_COUNT = 100;
+const INGREDIENT_COUNT = lines.length;
 
-var ingredients = {};
+var ingredients = [];
+
+function maximumScore() {
+  //while(true) {
+    var ratios = generate(SPOON_COUNT, INGREDIENT_COUNT);
+    for (var i in ratios) {
+      console.log(ingredients[i].name + " has " + ratios[i]);
+    }
+  //}
+}
 
 for (var line of lines) {
   var parsed = /([a-zA-Z]+): capacity (-?\d+), durability (-?\d+), flavor (-?\d+), texture (-?\d+), calories (-?\d+)/g.exec(line);
 
-  ingredients[parsed[1]] = new Ingredient(parsed[2], parsed[3], parsed[4], parsed[5], parsed[6]);
+  ingredients.push(new Ingredient(parsed[1], parsed[2], parsed[3], parsed[4], parsed[5], parsed[6]));
 }
 
-console.log(ingredients);
+maximumScore();
+
+function generate(max, thecount) {
+  var r = [];
+  var currsum = 0;
+  for(var i = 0; i < thecount - 1; i++) {
+     r[i] = randombetween(1, max - (thecount - i - 1) - currsum);
+     currsum += r[i];
+  }
+  r[thecount-1] = max - currsum;
+  return r;
+}
+
+function randombetween(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
