@@ -17,11 +17,11 @@ const SPOON_COUNT = 100;
 const INGREDIENT_COUNT = lines.length;
 
 var ingredients = [];
+var highestScore = 0, scoreCount = 0;
 
 function maximumScore() {
-  //while(true) {
-    //var ratios = generate(SPOON_COUNT, INGREDIENT_COUNT);
-    var ratios = [44, 56];
+  while (true) {
+    var ratios = generate(SPOON_COUNT, INGREDIENT_COUNT);
 
     var properties = { "capacity": 0, "durability": 0, "flavor": 0, "texture": 0 };
 
@@ -33,10 +33,36 @@ function maximumScore() {
       properties.texture += (rat * ing.texture);
     }
 
+    if (properties.capacity < 0) {
+      properties.capacity = 0;
+    }
+
+    if (properties.durability < 0) {
+      properties.durability = 0;
+    }
+
+    if (properties.flavor < 0) {
+      properties.flavor = 0;
+    }
+
+    if (properties.texture < 0) {
+      properties.texture = 0;
+    }
+
     var score = (properties.capacity * properties.durability * properties.flavor * properties.texture);
 
-    console.log(score);
-  //}
+    if (score > highestScore) {
+      highestScore = score;
+      scoreCount = 0;
+    } else {
+      scoreCount++;
+    }
+
+    if (scoreCount > Math.pow(SPOON_COUNT, 3)) {
+      console.log(highestScore);
+      break;
+    }
+  }
 }
 
 for (var line of lines) {
