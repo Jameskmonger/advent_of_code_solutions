@@ -24,4 +24,19 @@ for (var line of lines) {
     [ parsed[6], parseInt(parsed[7]) ]
   ];
 
+  var matches_all = true;
+
+  for (var detail of details) {
+    var expected = requirements[detail[0]];
+    var actual = detail[1];
+
+    if (expected !== actual) {
+      matches_all = false;
+      break;
+    }
+  }
+
+  if (matches_all) {
+    console.log(parsed[1] + " is the correct Sue.");
+  }
 }
