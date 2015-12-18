@@ -23,13 +23,12 @@ const REQUIRED_AMOUNT = 25;
 
 var results = [];
 
-var i = 0;
+var stalled = 0;
 
 while (true) {
-  i++;
-
-  if (i > 5000000)
+  if (stalled > 50000) {
     break;
+  }
 
   var shuf = getRandom(jugs, Math.floor(Math.random() * jugs.length) + 1).sort(function (a, b) {
     return a.index - b.index;
@@ -43,6 +42,9 @@ while (true) {
 
     if (results.indexOf(str) === -1) {
       results.push(str);
+      stalled = 0;
+    } else {
+      stalled++;
     }
   }
 }
