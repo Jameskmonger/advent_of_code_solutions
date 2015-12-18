@@ -26,6 +26,30 @@ for (let i = 0; i < inputLines.length; i++) {
   }
 }
 
+processLights();
+
+function processLights() {
+  let clone = JSON.parse(JSON.stringify(lights));
+
+  for (let i = 0; i < lights.length; i++) {
+    for (let j = 0; j < lights[i].length; j++) {
+      let neighbours = getLitNeighbourCount(j, i);
+
+      if (lights[i][j]) {
+        if (neighbours !== 2 && neighbours !== 3) {
+          clone[i][j] = false;
+        }
+      } else {
+        if (neighbours === 3) {
+          clone[i][j] = true;
+        }
+      }
+    }
+  }
+
+  lights = clone;
+}
+
 function getLitNeighbourCount(targetY, targetX) {
   let neighbours = [
     { x: targetX - 1, y: targetY - 1 },
