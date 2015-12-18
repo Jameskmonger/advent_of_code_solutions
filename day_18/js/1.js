@@ -26,4 +26,29 @@ for (let i = 0; i < inputLines.length; i++) {
   }
 }
 
-console.log(lights);
+function getLitNeighbourCount(targetY, targetX) {
+  let neighbours = [
+    { x: targetX - 1, y: targetY - 1 },
+    { x: targetX - 1, y: targetY + 0},
+    { x: targetX - 1, y: targetY + 1 },
+    { x: targetX + 0, y: targetY - 1 },
+    { x: targetX + 0, y: targetY + 1 },
+    { x: targetX + 1, y: targetY - 1 },
+    { x: targetX + 1, y: targetY + 0 },
+    { x: targetX + 1, y: targetY + 1 },
+  ];
+
+  let lit = 0;
+
+  for (let n of neighbours) {
+    if (n.x < 0 || n.y < 0 || n.x >= lights.length || n.y >= lights[n.x].length) {
+      continue;
+    }
+
+    if (lights[n.x][n.y] == true) {
+      lit++;
+    }
+  }
+
+  return lit;
+}
