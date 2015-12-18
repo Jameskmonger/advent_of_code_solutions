@@ -3,6 +3,8 @@
 const CHARACTER_ON = '#';
 const CHARACTER_OFF = '.';
 
+const STEP_COUNT = 4;
+
 let inputLines = `.#.#.#
 ...##.
 #....#
@@ -26,7 +28,25 @@ for (let i = 0; i < inputLines.length; i++) {
   }
 }
 
-processLights();
+for (let i = 0; i < STEP_COUNT; i++) {
+  processLights();
+}
+
+console.log(countLitLights());
+
+function countLitLights() {
+  let lit = 0;
+
+  for (let i = 0; i < lights.length; i++) {
+    for (let j = 0; j < lights[i].length; j++) {
+      if (lights[i][j]) {
+        lit++;
+      }
+    }
+  }
+
+  return lit;
+}
 
 function processLights() {
   let clone = JSON.parse(JSON.stringify(lights));
