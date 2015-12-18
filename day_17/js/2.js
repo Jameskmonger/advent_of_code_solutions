@@ -19,16 +19,16 @@ for (let s in sizes) {
   jugs.push(new Size(s, sizes[s]));
 }
 
-const REQUIRED_AMOUNT = 25;
+const REQUIRED_AMOUNT = 150;
+
+var lowest = 99999999;
 
 var results = [];
 
-var stalled = 0;
+var i = 0;
 
 while (true) {
-  if (stalled > 50000) {
-    break;
-  }
+  i++;
 
   var shuf = getRandom(jugs, Math.floor(Math.random() * jugs.length) + 1).sort(function (a, b) {
     return a.index - b.index;
@@ -40,12 +40,16 @@ while (true) {
       str += shuf[s].index + ",";
     }
 
-    if (results.indexOf(str) === -1) {
-      results.push(str);
-      stalled = 0;
-    } else {
-      stalled++;
+    // Put your lowest number here (calculate it first)
+    if (shuf.length === 2) {
+      if (results.indexOf(str) === -1) {
+        results.push(str);
+      }
     }
+  }
+
+  if (i > 10000000) {
+    break;
   }
 }
 
