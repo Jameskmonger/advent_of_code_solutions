@@ -19,7 +19,12 @@ for (let r of REPLACEMENTS) {
       break;
     }
 
-    output.push(replace(INPUT, r[0], r[1], position));
+    let rep = replace(INPUT, r[0], r[1], position);
+
+    if (output.indexOf(rep) === -1) {
+      output.push(rep);
+    }
+
     position += r[0].length;
   }
 }
