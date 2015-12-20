@@ -29,7 +29,7 @@ for (let r of REPLACEMENTS) {
   }
 }
 
-console.log(output);
+console.log(output.length);
 
 function replace(s, i, o, pos) {
   return s.substring(0, pos) + o + s.substring(pos + i.length);
