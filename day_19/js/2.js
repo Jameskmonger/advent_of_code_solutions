@@ -1,49 +1,55 @@
 "use strict";
 
 let REPLACEMENTS = [
-  ["Al", "ThF"],
-  ["Al", "ThRnFAr"],
-  ["B", "BCa"],
-  ["B", "TiB"],
-  ["B", "TiRnFAr"],
-  ["Ca", "CaCa"],
-  ["Ca", "PB"],
-  ["Ca", "PRnFAr"],
-  ["Ca", "SiRnFYFAr"],s
-  ["Ca", "SiRnMgAr"],
-  ["Ca", "SiTh"],
-  ["F", "CaF"],
-  ["F", "PMg"],
-  ["F", "SiAl"],
-  ["H", "CRnAlAr"],
-  ["H", "CRnFYFYFAr"],
-  ["H", "CRnFYMgAr"],
-  ["H", "CRnMgYFAr"],
-  ["H", "HCa"],
-  ["H", "NRnFYFAr"],
-  ["H", "NRnMgAr"],
-  ["H", "NTh"],
-  ["H", "OB"],
-  ["H", "ORnFAr"],
-  ["Mg", "BF"],
-  ["Mg", "TiMg"],
-  ["N", "CRnFAr"],
-  ["N", "HSi"],
-  ["O", "CRnFYFAr"],
-  ["O", "CRnMgAr"],
-  ["O", "HP"],
-  ["O", "NRnFAr"],
-  ["O", "OTi"],
-  ["P", "CaP"],
-  ["P", "PTi"],
-  ["P", "SiRnFAr"],
-  ["Si", "CaSi"],
-  ["Th", "ThCa"],
-  ["Ti", "BP"],
-  ["Ti", "TiTi"],
-  ["e", "HF"],
-  ["e", "NAl"],
-  ["e", "OMg"]
+  ["e", "H"],
+  ["e", "O"],
+  ["H", "HO"],
+  ["H", "OH"],
+  ["O", "HH"]
 ];
 
-let INPUT = "CRnSiRnCaPTiMgYCaPTiRnFArSiThFArCaSiThSiThPBCaCaSiRnSiRnTiTiMgArPBCaPMgYPTiRnFArFArCaSiRnBPMgArPRnCaPTiRnFArCaSiThCaCaFArPBCaCaPTiTiRnFArCaSiRnSiAlYSiThRnFArArCaSiRnBFArCaCaSiRnSiThCaCaCaFYCaPTiBCaSiThCaSiThPMgArSiRnCaPBFYCaCaFArCaCaCaCaSiThCaSiRnPRnFArPBSiThPRnFArSiRnMgArCaFYFArCaSiRnSiAlArTiTiTiTiTiTiTiRnPMgArPTiTiTiBSiRnSiAlArTiTiRnPMgArCaFYBPBPTiRnSiRnMgArSiThCaFArCaSiThFArPRnFArCaSiRnTiBSiThSiRnSiAlYCaFArPRnFArSiThCaFArCaCaSiThCaCaCaSiRnPRnCaFArFYPMgArCaPBCaPBSiRnFYPBCaFArCaSiAl";
+let INPUT = "HOH";
+
+let count = 0;
+
+while (true) {
+  let before = (INPUT + "");
+
+  for (let r of shuffle(REPLACEMENTS)) {
+    if (before.indexOf(r[1]) !== -1) {
+      before = replace(before, r[1], r[0], before.lastIndexOf(r[1]));
+
+      count++;
+    }
+  }
+
+  if (before === "e") {
+    break;
+  }
+}
+
+console.log(count);
+
+function replace(s, i, o, pos) {
+  return s.substring(0, pos) + o + s.substring(pos + i.length);
+}
+
+function shuffle(array) {
+  var counter = array.length, temp, index;
+
+  // While there are elements in the array
+  while (counter > 0) {
+    // Pick a random index
+    index = Math.floor(Math.random() * counter);
+
+    // Decrease counter by 1
+    counter--;
+
+    // And swap the last element with it
+    temp = array[counter];
+    array[counter] = array[index];
+    array[index] = temp;
+  }
+
+  return array;
+}
