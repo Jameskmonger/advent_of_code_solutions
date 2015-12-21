@@ -49,14 +49,20 @@
       }
 
       other.hitpoints -= damage;
-
-      console.log(other);
     }
   }
 
   function getRandomOutfit() {
     let weapon = WEAPONS[Math.floor(Math.random() * WEAPONS.length)];
-    let armor = ARMORS[Math.floor(Math.random() * ARMORS.length)];
+
+    let armorCount = getRandomInt(0, 1);
+    let armors = [];
+
+    if (armorCount === 0) {
+      armors = [];
+    } else if (armorCount === 1) {
+      armors = [ARMORS[Math.floor(Math.random() * ARMORS.length)]];
+    }
 
     let ringCount = getRandomInt(0, 2);
     let rings = [];
@@ -82,9 +88,11 @@
     total_dmg += weapon.damage;
     total_arm += weapon.armor;
 
-    total_cost += armor.cost;
-    total_dmg += armor.damage;
-    total_arm += armor.armor;
+    for (let a of armors) {
+      total_cost += a.cost;
+      total_dmg += a.damage;
+      total_arm += a.armor;
+    }
 
     for (let r of rings) {
       total_cost += r.cost;
@@ -95,12 +103,43 @@
     return new Item(total_cost, total_dmg, total_arm);
   }
 
-  let player = new Stats(8, 5, 5);
-  let boss = new Stats(12, 7, 2);
+  let lowest_cost = 9999999999;
 
-  for (var i = 0; i < 10; i++) {
-    console.log(getRandomOutfit());
+  for (let i = 0; i < 5000; i++) {
+    let boss = new Stats(104, 8, 1);
+
+    let outfit = getRandomOutfit();
+
+    let player = new Stats(100, outfit.damage, outfit.armor);
+
+    let player_won = false;
+
+    while (true) {
+      player.attack(boss);
+
+      if (player.hitpoints <= 0) {
+        player_won = false;
+        break;
+      }
+
+      boss.attack(player);
+
+      if (boss.hitpoints <= 0) {
+        player_won = true;
+        break;
+      }
+    }
+
+    if (player_won) {
+      console.log("Player won with " + outfit.cost);
+
+      if (outfit.cost < lowest_cost) {
+        lowest_cost = outfit.cost;
+      }
+    }
   }
+
+  console.log(lowest_cost);
 })();
 
 function getRandomInt(min, max) {
