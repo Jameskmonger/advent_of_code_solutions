@@ -76,7 +76,19 @@
 
       let random = available[Math.floor(Math.random() * available.length)];
 
-      spells.push(JSON.parse(JSON.stringify(random)));
+      myMana -= random.cost;
+
+      if (random.duration === 1) {
+        myHealth += random.heal;
+        bossDamage += random.damage;
+
+        if (bossHealth <= 0) {
+          console.log("boss has died");
+          return;
+        }
+      } else {
+        spells.push(JSON.parse(JSON.stringify(random)));
+      }
     } else {
       let damage = Math.max((bossDamage - effects.armor), 1);
       myHealth -= damage;
@@ -87,10 +99,5 @@
       }
     }
   }
-
-  console.log(SPELLS[3]);
-  spells.push(JSON.parse(JSON.stringify(SPELLS[3])));
-  processSpellDurations();
-  console.log(SPELLS[3]);
 
 })();
