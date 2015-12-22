@@ -68,6 +68,14 @@
 
     if (myTurn) {
 
+    } else {
+      let damage = Math.max((bossDamage - effects.armor), 1);
+      myHealth -= damage;
+
+      if (myHealth <= 0) {
+        console.log("player has died");
+        return;
+      }
     }
   }
 
