@@ -39,6 +39,13 @@
     };
   }
 
+  function processSpellDurations() {
+    spells = spells.map(s => {
+      s.duration -= 1;
+      return s;
+    }).filter(s => s.duration > 0);
+  }
+
   function play() {
     let effects = getEffects();
 
@@ -48,8 +55,6 @@
       console.log("boss has died");
       return;
     }
-
-    
   }
 
 })();
