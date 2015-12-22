@@ -71,4 +71,9 @@
     }
   }
 
+  console.log(SPELLS[3]);
+  spells.push(JSON.parse(JSON.stringify(SPELLS[3])));
+  processSpellDurations();
+  console.log(SPELLS[3]);
+
 })();
