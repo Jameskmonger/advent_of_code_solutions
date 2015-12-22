@@ -28,6 +28,14 @@
   let myMana = 500;
 
   function getEffects() {
+    if (spells.length === 0) {
+      return {
+        mana: 0,
+        damage: 0,
+        armor: 0
+      };
+    }
+
     let mana = spells.map(s => s.mana).reduce((a, b) => a + b);
     let damage = spells.map(s => s.damage).reduce((a, b) => a + b);
     let armor = spells.map(s => s.armor).reduce((a, b) => a + b);
@@ -89,6 +97,8 @@
       } else {
         spells.push(JSON.parse(JSON.stringify(random)));
       }
+
+      play(false);
     } else {
       let damage = Math.max((bossDamage - effects.armor), 1);
       myHealth -= damage;
@@ -97,7 +107,11 @@
         console.log("player has died");
         return;
       }
+
+      play(true);
     }
   }
+
+  play(true);
 
 })();
