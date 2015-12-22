@@ -83,6 +83,16 @@
     }
   }, 173);
 
+  const RECHARGE_EFFECT = new Effect(function(target) {
+    target.mana += 101;
+  });
+
+  const RECHARGE = new Spell(function(me, other) {
+    if (me.effects.recharge === 0 || me.effects.recharge === undefined) {
+      me.effects.recharge = 5;
+    }
+  }, 229);
+
   let Wiz = new Wizard(12, 25);
   let War = new Warrior(12, 5);
 
