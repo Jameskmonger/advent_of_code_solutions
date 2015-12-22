@@ -7,12 +7,12 @@
       this.cost = cost;
     }
 
-    attack(other) {
+    attack(me, other) {
       this.func(other);
     }
   }
 
-  const MAGIC_MISSILE = new Spell(function(other) {
+  const MAGIC_MISSILE = new Spell(function(me, other) {
     other.damage(4);
   }, 53);
 })();
