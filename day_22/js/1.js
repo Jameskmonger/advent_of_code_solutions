@@ -67,7 +67,12 @@
     processSpellDurations();
 
     if (myTurn) {
+      let available = getAvailableSpells();
 
+      if (available.length === 0) {
+        console.log("no more spells to cast");
+        return;
+      }
     } else {
       let damage = Math.max((bossDamage - effects.armor), 1);
       myHealth -= damage;
