@@ -16,6 +16,8 @@
     constructor(hitpoints, mana) {
       this.hitpoints = hitpoints;
       this.mana = mana;
+
+      this.effects = [];
     }
 
     hit(count) {
@@ -50,6 +52,16 @@
     other.hit(2);
     me.heal(2);
   }, 73);
+
+  const SHIELD_EFFECT = new Effect(function(target) {
+    target.armor = 7;
+  });
+
+  const SHIELD = new Spell(function(me, other) {
+    if (me.effects.shield === 0 || me.effects.shield === undefined) {
+      me.effects.shield = 6;
+    }
+  }, 113);
 
   let Wiz = new Wizard(12, 25);
   let War = new Warrior(12, 5);
