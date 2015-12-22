@@ -12,6 +12,16 @@
     }
   }
 
+  class Effect {
+    constructor(func) {
+      this.func = func;
+    }
+
+    apply(target) {
+      this.func(target);
+    }
+  }
+
   class Wizard {
     constructor(hitpoints, mana) {
       this.hitpoints = hitpoints;
@@ -62,6 +72,16 @@
       me.effects.shield = 6;
     }
   }, 113);
+
+  const POISON_EFFECT = new Effect(function(target) {
+    target.hit(3);
+  });
+
+  const POISON = new Spell(function(me, other) {
+    if (me.effects.poison === 0 || me.effects.poison === undefined) {
+      me.effects.poison = 6;
+    }
+  }, 173);
 
   let Wiz = new Wizard(12, 25);
   let War = new Warrior(12, 5);
