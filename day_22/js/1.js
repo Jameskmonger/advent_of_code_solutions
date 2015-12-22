@@ -15,4 +15,9 @@
   const MAGIC_MISSILE = new Spell(function(me, other) {
     other.damage(4);
   }, 53);
+
+  const DRAIN = new Spell(function(me, other) {
+    other.damage(2);
+    me.heal(2);
+  }, 73);
 })();
