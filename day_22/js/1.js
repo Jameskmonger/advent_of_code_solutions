@@ -26,6 +26,7 @@
     constructor(hitpoints, mana) {
       this.hitpoints = hitpoints;
       this.mana = mana;
+      this.armor = 0;
 
       this.effects = [];
     }
@@ -37,12 +38,30 @@
     heal(count) {
       this.hitpoints += count;
     }
+
+    takeTurn(target) {
+      if (this.effects.shield !== undefined && this.effects.shield >= 0) {
+        SHIELD_EFFECT.apply(this);
+        this.effects.shield--;
+      }
+
+      if (this.effects.poison !== undefined && this.effects.poison >= 0) {
+        POISON_EFFECT.apply(target);
+        this.effects.poison--;
+      }
+
+      if (this.effects.recharge !== undefined && this.effects.recharge >= 0) {
+        RECHARGE_EFFECT.apply(this);
+        this.effects.recharge--;
+      }
+    }
   }
 
   class Warrior {
     constructor(hitpoints, damage) {
       this.hitpoints = hitpoints;
       this.damage = damage;
+      this.armor = 0;
     }
 
     hit(count) {
@@ -51,6 +70,10 @@
 
     heal(count) {
       this.hitpoints += count;
+    }
+
+    takeTurn(target) {
+      target.hit(this.damage - target.armor);
     }
   }
 
@@ -93,11 +116,6 @@
     }
   }, 229);
 
-  let Wiz = new Wizard(12, 25);
-  let War = new Warrior(12, 5);
-
-  MAGIC_MISSILE.attack(Wiz, War);
-
-  console.log(Wiz);
-  console.log(War);
+  let player = new Wizard(10, 250);
+  let boss = new Warrior(13, 8);
 })();
