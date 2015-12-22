@@ -73,6 +73,10 @@
         console.log("no more spells to cast");
         return;
       }
+
+      let random = available[Math.floor(Math.random() * available.length)];
+
+      spells.push(JSON.parse(JSON.stringify(random)));
     } else {
       let damage = Math.max((bossDamage - effects.armor), 1);
       myHealth -= damage;
