@@ -40,7 +40,16 @@
   }
 
   function play() {
+    let effects = getEffects();
 
+    bossHealth -= effects.damage;
+
+    if (bossHealth <= 0) {
+      console.log("boss has died");
+      return;
+    }
+
+    
   }
 
 })();
