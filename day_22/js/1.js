@@ -46,7 +46,15 @@
     }).filter(s => s.duration > 0);
   }
 
-  function play() {
+  function getAvailableSpells() {
+    // Return the spells where the cost is less than or equal to our mana
+    // And where there are 0 spells with a matching name currently in play
+    return SPELLS.filter(s => s.cost <= myMana).filter(s => {
+      return (spells.filter(o => o.name === s.name).length === 0);
+    });
+  }
+
+  function play(myTurn) {
     let effects = getEffects();
 
     bossHealth -= effects.damage;
@@ -54,6 +62,12 @@
     if (bossHealth <= 0) {
       console.log("boss has died");
       return;
+    }
+
+    processSpellDurations();
+
+    if (myTurn) {
+
     }
   }
 
