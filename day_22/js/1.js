@@ -21,6 +21,26 @@
     new Spell("Recharge", 229, 0, 0, 0, 101, 5)
   ];
 
-  console.log(SPELLS);
+  let spells = [];
+  let bossHealth = 51;
+  let bossDamage = 9;
+  let myHealth = 50;
+  let myMana = 500;
+
+  function getEffects() {
+    let mana = spells.map(s => s.mana).reduce((a, b) => a + b);
+    let damage = spells.map(s => s.damage).reduce((a, b) => a + b);
+    let armor = spells.map(s => s.armor).reduce((a, b) => a + b);
+
+    return {
+      mana: mana,
+      damage: damage,
+      armor: armor
+    };
+  }
+
+  function play() {
+
+  }
 
 })();
