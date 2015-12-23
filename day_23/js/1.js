@@ -15,7 +15,7 @@ inc a`.split('\n');
     if (line === undefined) {
       break;
     }
-    
+
     processInstruction(line);
   }
 
@@ -59,6 +59,8 @@ inc a`.split('\n');
         checkReg(reg);
         if (registers[reg] % 2 === 0) {
           pointer += parseInt(parts[2]);
+        } else {
+          pointer++;
         }
         break;
       case "jio":
@@ -66,6 +68,8 @@ inc a`.split('\n');
         checkReg(reg);
         if (registers[reg] === 1) {
           pointer += parseInt(parts[2]);
+        } else {
+          pointer++;
         }
         break;
     }
