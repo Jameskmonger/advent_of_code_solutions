@@ -26,6 +26,26 @@ inc a`.split('\n');
         let reg = parts[1];
         registers[reg] *= 3;
         break;
+      case "inc":
+        let reg = parts[1];
+        registers[reg] += 1;
+        break;
+      case "jmp":
+        let reg = parts[1];
+        pointer += parseInt(parts[2]);
+        break;
+      case "jie":
+        let reg = parts[1].replace(',', '');
+        if (registers[reg] % 2 === 0) {
+          pointer += parseInt(parts[2]);
+        }
+        break;
+      case "jio":
+        let reg = parts[1].replace(',', '');
+        if (registers[reg] === 1) {
+          pointer += parseInt(parts[2]);
+        }
+        break;
     }
   }
 })();
