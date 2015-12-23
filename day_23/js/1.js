@@ -31,8 +31,7 @@ inc a`.split('\n');
         registers[reg] += 1;
         break;
       case "jmp":
-        let reg = parts[1];
-        pointer += parseInt(parts[2]);
+        pointer += parseInt(parts[1]);
         break;
       case "jie":
         let reg = parts[1].replace(',', '');
