@@ -15,7 +15,11 @@
   let total = PACKAGES.reduce((a, b) => a + b);
 
   let compartment = total / 3;
-  let lowest_qe = 9999999;
+
+  let best = {
+    legroom: 99999,
+    qe: 99999
+  };
 
   let successes = 0;
 
@@ -42,10 +46,18 @@
     }
 
     if (compartment_sizes[0] === 0 && compartment_sizes[1] === 0 && compartment_sizes[2] === 0) {
-      let qe = compartments[0].reduce((a, b) => a * b);
+      let legroom = compartments[0].length;
 
-      if (qe < lowest_qe) {
-        lowest_qe = qe;
+      if (legroom < best.legroom) {
+        best.legroom = legroom;
+
+        best.qe = compartments[0].reduce((a, b) => a * b);
+      } else if (legroom === best.legroom) {
+        let qe = compartments[0].reduce((a, b) => a * b);
+
+        if (qe < best.qe) {
+          best.qe = qe;
+        }
       }
 
       successes++;
@@ -56,7 +68,7 @@
     }
   }
 
-  console.log(lowest_qe);
+  console.log(best);
 
   function shuffle(o) {
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
