@@ -12,7 +12,54 @@
 10
 11`.split('\n').map(n => parseInt(n));
 
-  console.log(PACKAGES);
+  let total = PACKAGES.reduce((a, b) => a + b);
 
-  
+  let compartment = total / 3;
+  let lowest_qe = 9999999;
+
+  let successes = 0;
+
+  while (true) {
+    let compartments = [];
+
+    for (let c = 0; c < 3; c++) {
+      compartments[c] = [];
+    }
+
+    let compartment_sizes = [ compartment, compartment, compartment ];
+
+    let _clone = shuffle(PACKAGES.slice(0));
+
+    for (let p of _clone) {
+      for (let c = 0; c < 3; c++) {
+        if (compartment_sizes[c] < p) {
+          continue;
+        }
+
+        compartments[c].push(p);
+        compartment_sizes[c] -= p;
+      }
+    }
+
+    if (compartment_sizes[0] === 0 && compartment_sizes[1] === 0 && compartment_sizes[2] === 0) {
+      let qe = compartments[0].reduce((a, b) => a * b);
+
+      if (qe < lowest_qe) {
+        lowest_qe = qe;
+      }
+
+      successes++;
+    }
+
+    if (successes > 500) {
+      break;
+    }
+  }
+
+  console.log(lowest_qe);
+
+  function shuffle(o) {
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+  }
 })();
